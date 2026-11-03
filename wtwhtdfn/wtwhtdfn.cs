@@ -48,11 +48,6 @@ namespace wtwhtdfn
         }
 
 
-        public static bool HexSide(HexIndex a, HexIndex b)
-        {
-            int x = a.Q - b.Q;
-            int y = a.R - b.R;
-            return Math.Abs(x) <= 1 && Math.Abs(y) <= 1 && x != y;
-        }
+
     }
 }
