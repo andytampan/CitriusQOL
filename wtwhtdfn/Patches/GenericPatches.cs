@@ -15,6 +15,56 @@ using System.Text;
 using wtwhtdfn;
 
 
+[MonoModPatch("Sim")]
+public class patch_Sim_DebuggerGlyph : Sim
+{
+
+    [MonoModPublic]
+    [MonoModIgnore]
+    public extern void SetInCycle(bool inCycle);
+
+}
+
+[MonoModPatch("SolutionEditorScreen")]
+public class patch_SolutionEditorScreen_DebuggerGlyph : SolutionEditorScreen
+{
+    public patch_SolutionEditorScreen_DebuggerGlyph(Solution solution, MusicTrack musicTrack, Sound fanfare) : base(solution, musicTrack, fanfare)
+    {
+    }
+
+    [MonoModPublic]
+    public SimPlayState simulationState;
+
+    [MonoModPublic]
+    [MonoModIgnore]
+    public extern void CompleteAndPauseSim();
+
+}
+
+[MonoModPatch("SolutionEditorPartsPanel/ToolbarManager")]
+public class patch_SolutionEditorPartsPanel 
+{
+    [MonoModIgnore]
+
+    public List<SolutionEditorPartsPanel.PartsSection> sections;
+
+    [MonoModIgnore]
+    public extern void orig_method_2047(string sectionName, List<PartTypeForToolbar> partToolbar);
+
+    [MonoModPatch("method_2047")]
+    public void method_2047(string sectionName, List<PartTypeForToolbar> partToolbar)
+    {
+        orig_method_2047(sectionName, partToolbar);
+        if (sectionName == Translations.Translate("Glyphs")) {
+            List<PartTypeForToolbar> toolbar = new List<PartTypeForToolbar>();
+            var glyph = PartTypeForToolbar.Make(wtwhtdfn.Resource.GlyphOfDebugger, true, false);
+            toolbar.Add(glyph);
+            orig_method_2047("Citrius QOL", toolbar);
+        }
+
+    }
+}
+
 public class patch_Solution
     {
 

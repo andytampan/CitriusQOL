@@ -11,7 +11,6 @@ using System.Text;
 [MonoModPatch("SolutionEditorScreen")]
 public class patch_SolutionEditorScreen
 {
-    
     public static float cm_AverageSpeed = 4f;
 
     [MonoModILInject("GetSimulationSpeed")]

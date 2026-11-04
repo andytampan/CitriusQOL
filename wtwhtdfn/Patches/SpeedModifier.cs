@@ -32,8 +32,7 @@ public class patch_SolutionEditorProgramPanel2
             wtwhtdfn.Resource.RenderCenter(Assets.textures.solution_editor.program_panel.instruction_highlight, position);
             if (InputManager.IsClickPressed(MouseButtonType.LeftClick))
             {
-                speedLevel++;
-                patch_SolutionEditorScreen_TurboSpeed.cm_TurboSpeed *= 2;
+                patch_SolutionEditorScreen_TurboSpeed.cm_TurboSpeed++;
             }
 
         }
@@ -48,14 +47,13 @@ public class patch_SolutionEditorProgramPanel2
             wtwhtdfn.Resource.RenderCenter(Assets.textures.solution_editor.program_panel.instruction_highlight, position2);
             if (InputManager.IsClickPressed(MouseButtonType.LeftClick))
             {
-                speedLevel--;
-                patch_SolutionEditorScreen_TurboSpeed.cm_TurboSpeed /= 2;
+                patch_SolutionEditorScreen_TurboSpeed.cm_TurboSpeed--;
             }
 
         }
         Vector2 position3 = new Vector2(InputManager.screenSize.X - 55, InputManager.screenSize.Y / 2 - 80);
         wtwhtdfn.Resource.RenderCenter(Assets.textures.solution_editor.program_panel.instruction, position3);
-        TextureRenderer.RenderText(speedLevel.ToString(), position3 - new Vector2(0, 5), Assets.fonts.crimson_16_5, UIConsts.darkTextColor, TextAlignment.Center, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, Color.Black, null, int.MaxValue, false, true);
+        TextureRenderer.RenderText(patch_SolutionEditorScreen_TurboSpeed.cm_TurboSpeed.ToString(), position3 - new Vector2(0, 5), Assets.fonts.crimson_16_5, UIConsts.darkTextColor, TextAlignment.Center, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, Color.Black, null, int.MaxValue, false, true);
 
         orig_RenderFrame(deltaTime);
     }
@@ -98,7 +96,7 @@ public class patch_SolutionEditorScreen_TurboSpeed
 
     public static float MultiplySpeed(float simSpeed, float multiplier)
     {
-        return simSpeed *= multiplier;
+        return (float)(simSpeed * Math.Pow(2, multiplier));
     }
 }
 
