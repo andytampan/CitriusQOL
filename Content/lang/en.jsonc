@@ -2,7 +2,13 @@
   "wtwhtdfn": {
     "": "CitriusQOL",
     "description": "This is a Quality of Life for Opus Magnum made by Citrius (lemony)",
-    
+    "parts": {
+      "debuggerGlyph":{
+        "": "Glyph of Debugging",
+        "description": "Pause the game when the glyph has an atom hovering on it. Might be jank when paired with high speed modifier"
+      } 
+
+    },
     "settings": {
       "enableOverlap": "Enable overlap",
       "disableUnique": "Enable multiple input/output",

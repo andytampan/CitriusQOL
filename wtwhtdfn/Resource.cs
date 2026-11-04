@@ -32,7 +32,7 @@ namespace wtwhtdfn
             Vector2 vector14 = (marker_base.size.ToVector2() / 2).Rounded() + new Vector2(0f, 1f);
             partRenderer.RenderBase(marker_base, vector14);
             partRenderer.RenderRotating(Assets.textures.parts.marker_lighting, new HexIndex(0, 0), Vector2.Zero);
-            partRenderer.RenderBase(Assets.textures.parts.marker_details, vector14);
+            // partRenderer.RenderBase(Assets.textures.parts.marker_details, vector14); //find a good icon to use for this glyph
 
             
             ISim Isim = editor.GetSimulation();

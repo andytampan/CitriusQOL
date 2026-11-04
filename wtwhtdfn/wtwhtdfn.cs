@@ -21,20 +21,15 @@ namespace wtwhtdfn
             Logger.Log("am i sane load");
 
             QuintessentialMod mod = wtwhtdfn.Instance;
-            string id = "debugger";
             Resource.GlyphOfDebugger = new()
             {
-                cost = 30,
+                cost = 0,
                 isFullHexCover = true, // Is a glyph
                 glowTexture = Assets.textures.select.single_glow, // Shadow/glow
                 strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
                 baseTexture = Assets.textures.parts.icons.marker, // Panel icon
                 hoverTexture = Assets.textures.parts.icons.marker_hover, // Hovered panel icon
-                glyphHexes = new HexIndex[]
-            {
-                new HexIndex(0, 0),
-
-            },
+                glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
                 permissionCategory = PuzzlePermissions.None,
 
             };
