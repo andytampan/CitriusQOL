@@ -102,33 +102,31 @@ public class patch_Sim : Sim
 
 
     public static bool cm_OutputsPlaced;
+    public static bool cm_SurrenderPlaced;
     public bool AllOutputsComplete()
     {
-        return orig_AllOutputsComplete() && cm_OutputsPlaced;
+        return orig_AllOutputsComplete() && cm_OutputsPlaced && !cm_SurrenderPlaced;
     }
 
-    public static void ProductCheck(SolutionEditorBase solutionEditor)
+    public static void WinnableCheck(SolutionEditorBase solutionEditor)
     {
         Solution solution = solutionEditor.GetSolution();
         int outputCount = 0;
+        cm_SurrenderPlaced = false;
         foreach (Part part in solution.parts)
         {
             if (part.GetType() == PartTypes.normalOutput || part.GetType() == PartTypes.repeatingOutput) outputCount++;
-        }
-        ;
+            if (part.GetType() == wtwhtdfn.Resource.GlyphOfSurrender) cm_SurrenderPlaced = true;
+        };
 
         cm_OutputsPlaced = outputCount >= solution.GetPuzzle().outputs.Length;
-
-
-
     }
-
     [MonoModPublic]
     public static extern Maybe<Sim> orig_ConstructSimulation(SolutionEditorBase solutionEditor);
     public static Maybe<Sim> ConstructSimulation(SolutionEditorBase solutionEditor)
     {
         var a = orig_ConstructSimulation(solutionEditor);
-        ProductCheck(solutionEditor);
+        WinnableCheck(solutionEditor);
         return a;
     }
 

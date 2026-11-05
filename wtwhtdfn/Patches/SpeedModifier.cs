@@ -14,7 +14,6 @@ public class patch_SolutionEditorProgramPanel2
 {
     [MonoModIgnore]
     public extern void orig_RenderFrame(float deltaTime);
-    int speedLevel = 1;
 
     public void RenderFrame(float deltaTime)
     {

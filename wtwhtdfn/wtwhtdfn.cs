@@ -35,7 +35,21 @@ namespace wtwhtdfn
             };
             QApi.AddPartType(Instance, Resource.GlyphOfDebugger, "debuggerGlyph");
             mod.AddPartTypesRenderer(Resource.DebuggerRender, (Part part) => part.GetType() == Resource.GlyphOfDebugger);
-            QApi.AddCycleEvent(new(CycleEvent.CycleEventExecutionType.AfterInstructions, Resource.debuggingGlyphCode));
+
+            Resource.GlyphOfSurrender = new()
+            {
+                cost = 0,
+                isFullHexCover = true, // Is a glyph
+                glowTexture = Assets.textures.select.single_glow, // Shadow/glow
+                strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
+                baseTexture = Assets.textures.parts.icons.marker, // Panel icon
+                hoverTexture = Assets.textures.parts.icons.marker_hover, // Hovered panel icon
+                glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
+                permissionCategory = PuzzlePermissions.None,
+
+            };
+            QApi.AddPartType(Instance, Resource.GlyphOfSurrender, "surrenderGlyph");
+            mod.AddPartTypesRenderer(Resource.SurrenderRender, (Part part) => part.GetType() == Resource.GlyphOfSurrender);
         }
 
 

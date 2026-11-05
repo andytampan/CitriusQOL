@@ -25,6 +25,11 @@ namespace wtwhtdfn
         }
 
         public static PartType GlyphOfDebugger;
+        public static PartType GlyphOfSurrender;
+        internal static PartType[] Glyph =
+        {
+            GlyphOfDebugger, GlyphOfSurrender
+        };
 
         public static void DebuggerRender(Part part, Vector2 position, SolutionEditorBase editor, PartRenderer partRenderer)
         {
@@ -73,5 +78,12 @@ namespace wtwhtdfn
 
         }
 
+        internal static void SurrenderRender(Part part, Vector2 position, SolutionEditorBase editor, PartRenderer partRenderer)
+        {
+            Texture marker_base = Assets.textures.parts.marker_base;
+            Vector2 vector14 = (marker_base.size.ToVector2() / 2).Rounded() + new Vector2(0f, 1f);
+            partRenderer.RenderBase(marker_base, vector14);
+            partRenderer.RenderRotating(Assets.textures.parts.marker_lighting, new HexIndex(0, 0), Vector2.Zero);
+        }
     }
 }
