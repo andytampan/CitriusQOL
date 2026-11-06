@@ -13,12 +13,18 @@ namespace wtwhtdfn
         
         public override string ModId => "wtwhtdfn";
 
+        
         public override void Load() {}
 
         public override void LoadContent()
         {
 
             Logger.Log("am i sane load");
+
+            Resource.markerSquare = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/marker");
+            Resource.markerDebugger = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/marker_debugging");
+            Resource.markerSurrender = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/marker_surrender");
+            Resource.markerDisposal = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/marker_disposal");
 
             QuintessentialMod mod = wtwhtdfn.Instance;
             Resource.GlyphOfDebugger = new()
@@ -50,6 +56,23 @@ namespace wtwhtdfn
             };
             QApi.AddPartType(Instance, Resource.GlyphOfSurrender, "surrenderGlyph");
             mod.AddPartTypesRenderer(Resource.SurrenderRender, (Part part) => part.GetType() == Resource.GlyphOfSurrender);
+
+            Resource.PocketDisposal = new()
+            {
+                cost = 0,
+                isFullHexCover = true, // Is a glyph
+                glowTexture = Assets.textures.select.single_glow, // Shadow/glow
+                strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
+                baseTexture = Assets.textures.parts.icons.marker, // Panel icon
+                hoverTexture = Assets.textures.parts.icons.marker_hover, // Hovered panel icon
+                glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
+                permissionCategory = PuzzlePermissions.None,
+
+            };
+            QApi.AddPartType(Instance, Resource.PocketDisposal, "pocketDisposal");
+            QApi.BindGlyphCycle(Resource.PocketDisposal, new PartCycleDelegate(PartCycleExecutionType.AfterBonder, Resource.PocketDisposalCode));
+            QApi.AddRecipe(wtwhtdfn.Instance, new GlyphRecipe(), Resource.PocketDisposal.Id, Resource.PocketDisposal.Id);
+            mod.AddPartTypesRenderer(Resource.PocketDisposalRender, (Part part) => part.GetType() == Resource.PocketDisposal);
         }
 
 

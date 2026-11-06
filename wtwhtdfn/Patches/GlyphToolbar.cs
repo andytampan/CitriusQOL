@@ -21,11 +21,18 @@ public class patch_SolutionEditorPartsPanel
         if (sectionName == Translations.Translate("Glyphs"))
         {
             List<PartTypeForToolbar> toolbar = new List<PartTypeForToolbar>();
-            var glyph = PartTypeForToolbar.Make(Resource.GlyphOfDebugger, true, false);
-            toolbar.Add(glyph);
-            glyph = PartTypeForToolbar.Make(Resource.GlyphOfSurrender, true, false);
-            toolbar.Add(glyph);
-
+            PartType[] glyphList =
+            {
+                Resource.GlyphOfDebugger,
+                Resource.GlyphOfSurrender,
+                Resource.PocketDisposal,
+            };
+            foreach (PartType part in glyphList)
+            {
+                var glyph = PartTypeForToolbar.Make(part, true, false);
+                toolbar.Add(glyph);
+            }
+           
             orig_method_2047("Citrius QOL", toolbar);
         }
 

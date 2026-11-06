@@ -26,10 +26,7 @@ namespace wtwhtdfn
 
         public static PartType GlyphOfDebugger;
         public static PartType GlyphOfSurrender;
-        internal static PartType[] Glyph =
-        {
-            GlyphOfDebugger, GlyphOfSurrender
-        };
+        public static PartType PocketDisposal;
 
         public static void DebuggerRender(Part part, Vector2 position, SolutionEditorBase editor, PartRenderer partRenderer)
         {
@@ -37,9 +34,9 @@ namespace wtwhtdfn
             Vector2 vector14 = (marker_base.size.ToVector2() / 2).Rounded() + new Vector2(0f, 1f);
             partRenderer.RenderBase(marker_base, vector14);
             partRenderer.RenderRotating(Assets.textures.parts.marker_lighting, new HexIndex(0, 0), Vector2.Zero);
+            partRenderer.RenderBase(markerDebugger, vector14);
             // partRenderer.RenderBase(Assets.textures.parts.marker_details, vector14); //find a good icon to use for this glyph
 
-            
             ISim Isim = editor.GetSimulation();
 
 
@@ -57,7 +54,7 @@ namespace wtwhtdfn
             }
             
         }
-        internal static void debuggingGlyphCode(Sim sim, CycleEvent.CycleEventExecutionType executionType)
+        internal static void DebuggingGlyphCode(Sim sim, CycleEvent.CycleEventExecutionType executionType)
         {
             foreach (Part part in sim.simulationDict.Keys)
             {
@@ -78,12 +75,38 @@ namespace wtwhtdfn
 
         }
 
+        public static Texture markerSquare;
+        internal static Texture markerDebugger;
+        internal static Texture markerSurrender;
+        internal static Texture markerDisposal;
+
         internal static void SurrenderRender(Part part, Vector2 position, SolutionEditorBase editor, PartRenderer partRenderer)
         {
             Texture marker_base = Assets.textures.parts.marker_base;
             Vector2 vector14 = (marker_base.size.ToVector2() / 2).Rounded() + new Vector2(0f, 1f);
             partRenderer.RenderBase(marker_base, vector14);
             partRenderer.RenderRotating(Assets.textures.parts.marker_lighting, new HexIndex(0, 0), Vector2.Zero);
+            partRenderer.RenderBase(markerSurrender, vector14);
+        }
+
+        internal static void PocketDisposalRender(Part part, Vector2 position, SolutionEditorBase editor, PartRenderer partRenderer)
+        {
+            Texture marker_base = Assets.textures.parts.marker_base;
+            Vector2 vector14 = (marker_base.size.ToVector2() / 2).Rounded() + new Vector2(0f, 1f);
+            partRenderer.RenderBase(marker_base, vector14);
+            partRenderer.RenderRotating(Assets.textures.parts.marker_lighting, new HexIndex(0, 0), Vector2.Zero);
+            partRenderer.RenderBase(markerDisposal, vector14);
+        }
+
+        internal static bool PocketDisposalCode(Sim sim, Part part, PartSimState simState, GlyphRecipe recipe, bool isCycleStart)
+        {
+            var reference = sim.FindAtomRelative(part, new HexIndex(0, 0));
+            if (reference.HasValue() && !reference.GetValue().isHeldByArm)
+            {
+                sim.molecules.Remove(reference.GetValue().molecule);
+                
+            }
+            return true;
         }
     }
 }

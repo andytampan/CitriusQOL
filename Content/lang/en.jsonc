@@ -5,8 +5,17 @@
     "parts": {
       "debuggerGlyph":{
         "": "Glyph of Debugging",
-        "description": "Pause the game when the glyph has an atom hovering on it. Might be jank when paired with high speed modifier"
+        "description": "Pause the game when the glyph has an atom hovering on it. May be jank when paired with high speed modifier"
+      } ,
+      "surrenderGlyph":{
+        "": "Glyph of Surrender",
+        "description": "Mark the puzzle as unwinnable, disabling the victory screen. Helpful for modifying solve past the winning condition"
+      },
+      "pocketDisposal":{
+        "": "Pocket Disposal",
+        "description": "Remove and dispose any molecule that's not held on it, even works with multi-atom molecule"
       } 
+      
 
     },
     "settings": {
