@@ -33,8 +33,8 @@ namespace wtwhtdfn
                 isFullHexCover = true, // Is a glyph
                 glowTexture = Assets.textures.select.single_glow, // Shadow/glow
                 strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
-                baseTexture = Assets.textures.parts.icons.marker, // Panel icon
-                hoverTexture = Assets.textures.parts.icons.marker_hover, // Hovered panel icon
+                baseTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_debugging"), // Panel icon
+                hoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_debugging"), // Hovered panel icon
                 glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
                 permissionCategory = PuzzlePermissions.None,
 
@@ -48,8 +48,8 @@ namespace wtwhtdfn
                 isFullHexCover = true, // Is a glyph
                 glowTexture = Assets.textures.select.single_glow, // Shadow/glow
                 strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
-                baseTexture = Assets.textures.parts.icons.marker, // Panel icon
-                hoverTexture = Assets.textures.parts.icons.marker_hover, // Hovered panel icon
+                baseTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_surrender"), // Panel icon
+                hoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_surrender"), // Hovered panel icon
                 glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
                 permissionCategory = PuzzlePermissions.None,
 
@@ -63,8 +63,8 @@ namespace wtwhtdfn
                 isFullHexCover = true, // Is a glyph
                 glowTexture = Assets.textures.select.single_glow, // Shadow/glow
                 strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
-                baseTexture = Assets.textures.parts.icons.marker, // Panel icon
-                hoverTexture = Assets.textures.parts.icons.marker_hover, // Hovered panel icon
+                baseTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_disposal"), // Panel icon
+                hoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_disposal"), // Hovered panel icon
                 glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
                 permissionCategory = PuzzlePermissions.None,
 
