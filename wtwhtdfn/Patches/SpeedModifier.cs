@@ -63,7 +63,7 @@ public class patch_SolutionEditorProgramPanel2
 public class patch_SolutionEditorScreen_TurboSpeed
 {
 
-    public static float cm_TurboSpeed = 1f;
+    public static float cm_TurboSpeed = 0f;
 
     [MonoModILInject("GetSimulationSpeed")]
 

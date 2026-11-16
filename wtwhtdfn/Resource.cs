@@ -42,7 +42,7 @@ namespace wtwhtdfn
 
             foreach (Molecule m in Isim.GetMolecules())
             {
-                if (m.GetAtoms().TryGetValue(part.InFrontBy(new HexIndex(0,0)), out Atom _))
+                if (m.GetAtoms().TryGetValue(part.GlobalPosFromLocal(new HexIndex(0,0)), out Atom _))
                 {
                     var sim = (patch_Sim)Isim;
                     patch_SolutionEditorScreen_DebuggerGlyph SEC = (patch_SolutionEditorScreen_DebuggerGlyph)sim.solutionEditor;

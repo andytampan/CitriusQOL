@@ -27,10 +27,10 @@ public class patch_PartDraggingInputMode : PartDraggingInputMode
                 {
                     HexIndex trackAOriginCoordinate = trackA.GetHexPos();
                     HexIndex trackBOriginCoordinate = trackB.GetHexPos();
-                    HexIndex trackStartA = trackA.InFrontBy(trackA.GetTrack()[0]);
-                    HexIndex trackStartB = trackB.InFrontBy(trackB.GetTrack()[0]);
-                    HexIndex trackEndA = trackA.InFrontBy(trackA.GetTrack()[trackA.GetTrack().Count - 1]);
-                    HexIndex trackEndB = trackB.InFrontBy(trackB.GetTrack()[trackB.GetTrack().Count - 1]);
+                    HexIndex trackStartA = trackA.GlobalPosFromLocal(trackA.GetTrack()[0]);
+                    HexIndex trackStartB = trackB.GlobalPosFromLocal(trackB.GetTrack()[0]);
+                    HexIndex trackEndA = trackA.GlobalPosFromLocal(trackA.GetTrack()[trackA.GetTrack().Count - 1]);
+                    HexIndex trackEndB = trackB.GlobalPosFromLocal(trackB.GetTrack()[trackB.GetTrack().Count - 1]);
 
                     if (wtwhtdfn.Resource.HexSide(trackEndA, trackStartB))
                     {
@@ -38,11 +38,11 @@ public class patch_PartDraggingInputMode : PartDraggingInputMode
                         mergedTrack.RemoveTrackFront();
                         foreach (HexIndex hex in trackA.GetTrack())
                         {
-                            mergedTrack.AddTrackBack(trackA.InFrontBy(hex));
+                            mergedTrack.AddTrackBack(trackA.GlobalPosFromLocal(hex));
                         }
                         foreach (HexIndex hex in trackB.GetTrack())
                         {
-                            mergedTrack.AddTrackBack(trackB.InFrontBy(hex));
+                            mergedTrack.AddTrackBack(trackB.GlobalPosFromLocal(hex));
                         }
                         DraggedPart draggedPart = new DraggedPart();
                         draggedParts.Clear();
@@ -56,11 +56,11 @@ public class patch_PartDraggingInputMode : PartDraggingInputMode
                         mergedTrack.RemoveTrackFront();
                         foreach (HexIndex hex in trackB.GetTrack())
                         {
-                            mergedTrack.AddTrackBack(trackB.InFrontBy(hex));
+                            mergedTrack.AddTrackBack(trackB.GlobalPosFromLocal(hex));
                         }
                         foreach (HexIndex hex in trackA.GetTrack())
                         {
-                            mergedTrack.AddTrackBack(trackA.InFrontBy(hex));
+                            mergedTrack.AddTrackBack(trackA.GlobalPosFromLocal(hex));
                         }
                         DraggedPart draggedPart = new DraggedPart();
                         draggedParts.Clear();

@@ -1,6 +1,7 @@
 ﻿using Quintessential;
 using Quintessential.Settings;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using static Quintessential.PartCycleDelegate;
 
@@ -19,7 +20,7 @@ namespace wtwhtdfn
         public override void LoadContent()
         {
 
-            Logger.Log("am i sane load");
+            wtwhtdfn.Instance.Log.Debug("am i sane load");
 
             Resource.markerSquare = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/marker");
             Resource.markerDebugger = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/marker_debugging");
@@ -33,8 +34,8 @@ namespace wtwhtdfn
                 isFullHexCover = true, // Is a glyph
                 glowTexture = Assets.textures.select.single_glow, // Shadow/glow
                 strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
-                baseTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_debugging"), // Panel icon
-                hoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_debugging"), // Hovered panel icon
+                iconTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_debugging"), // Panel icon
+                iconHoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_debugging"), // Hovered panel icon
                 glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
                 permissionCategory = PuzzlePermissions.None,
 
@@ -48,8 +49,8 @@ namespace wtwhtdfn
                 isFullHexCover = true, // Is a glyph
                 glowTexture = Assets.textures.select.single_glow, // Shadow/glow
                 strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
-                baseTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_surrender"), // Panel icon
-                hoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_surrender"), // Hovered panel icon
+                iconTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_surrender"), // Panel icon
+                iconHoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_surrender"), // Hovered panel icon
                 glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
                 permissionCategory = PuzzlePermissions.None,
 
@@ -63,8 +64,8 @@ namespace wtwhtdfn
                 isFullHexCover = true, // Is a glyph
                 glowTexture = Assets.textures.select.single_glow, // Shadow/glow
                 strokeTexture = Assets.textures.select.single_stroke, // Stroke/outline
-                baseTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_disposal"), // Panel icon
-                hoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_disposal"), // Hovered panel icon
+                iconTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/icon_disposal"), // Panel icon
+                iconHoverTexture = AssetLoaderHelper.LoadTexture("textures/wtwhtdfn/hover_disposal"), // Hovered panel icon
                 glyphHexes = new HexIndex[] { new HexIndex(0, 0) },
                 permissionCategory = PuzzlePermissions.None,
 
@@ -72,6 +73,10 @@ namespace wtwhtdfn
             QApi.AddPartType(Instance, Resource.PocketDisposal, "pocketDisposal");
             QApi.BindGlyphCycle(Resource.PocketDisposal, new PartCycleDelegate(PartCycleExecutionType.AfterBonder, Resource.PocketDisposalCode));
             QApi.AddRecipe(wtwhtdfn.Instance, new GlyphRecipe(), Resource.PocketDisposal.Id, Resource.PocketDisposal.Id);
+            List<PartType> CitriusQOLGlyph= [Resource.PocketDisposal, Resource.GlyphOfDebugger, Resource.GlyphOfSurrender];
+            LocString name = Translate("CitriusQOL");
+            QApi.AddPartTypeSectionToPanel(CitriusQOLGlyph, name);
+            
             mod.AddPartTypesRenderer(Resource.PocketDisposalRender, (Part part) => part.GetType() == Resource.PocketDisposal);
         }
 
